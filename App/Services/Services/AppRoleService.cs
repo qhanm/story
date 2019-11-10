@@ -1,4 +1,6 @@
-﻿using story.App.CodeFirstEntity.Entities;
+﻿using AutoMapper.QueryableExtensions;
+using story.App.AutoMapper;
+using story.App.CodeFirstEntity.Entities;
 using story.App.Model;
 using story.App.Services.Repositories;
 using story.App.Services.ServiceInterface;
@@ -34,7 +36,7 @@ namespace story.App.Services.Services
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            GC.SuppressFinalize(this);
         }
 
         public AppRoleViewModel FindId(Guid? id)
@@ -44,12 +46,16 @@ namespace story.App.Services.Services
 
         public List<AppRoleViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            var appRoles = _repository.FindAll()
+                                      .OrderBy(x => x.DateUpdated)
+                                      .ProjectTo<AppRoleViewModel>(AutoMapperConfig.RegisterMapping())
+                                      .ToList();
+            return appRoles;
         }
 
         public void SaveChange()
         {
-            throw new NotImplementedException();
+            _unitOfWork.Commit();
         }
 
         public void Update(AppRoleViewModel model)

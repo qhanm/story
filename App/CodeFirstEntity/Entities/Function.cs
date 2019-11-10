@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace story.App.CodeFirstEntity.Entities
 {
     [Table("Functions")]
-    public class Function : PrivateKey<int>, SwichStatus
+    public class Function : PrivateKey<string>, SwichStatus
     {
         public Function()
         {
         }
 
-        public Function(int id, string name, string url, string iconCss, int sortOrder, Status status, int? parentId)
+        public Function(string id, string name, string url, string iconCss, int sortOrder, Status status, string parentId)
         {
             Id = id;
             Name = name;
@@ -22,7 +22,7 @@ namespace story.App.CodeFirstEntity.Entities
             ParentId = parentId;
         }
 
-        public Function(string name, string url, string iconCss, int sortOrder, Status status, int? parentId)
+        public Function(string name, string url, string iconCss, int sortOrder, Status status, string parentId)
         {
             Name = name;
             Url = url;
@@ -40,7 +40,7 @@ namespace story.App.CodeFirstEntity.Entities
 
         public int SortOrder { get; set; }
 
-        public int? ParentId { get; set; }
+        public string ParentId { get; set; }
         public Status Status { get; set; }
     }
 }
