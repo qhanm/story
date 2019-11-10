@@ -46,7 +46,15 @@ namespace story.App.CodeFirstEntity
                     new Function() {Id = "ERROR", Name = "Error",ParentId = "SYSTEM",SortOrder = 5,Status = Status.Active, Url = "/admin/error/index",IconCss = "fa-home"  },
                     new Function() {Id = "SETTING", Name = "Configuration",ParentId = "SYSTEM",SortOrder = 6,Status = Status.Active, Url = "/admin/setting/index",IconCss = "fa-home"  },
                 
-                    new Function()
+                    new Function() {Id = "STORY", Name = "Story", ParentId = null, SortOrder = 1, Status = Status.Active, Url="/", IconCss = "null" },                    new Function() {Id = "CATEGORIES", Name = "Categories", ParentId = "STORY", SortOrder = 2, Status = Status.Active, Url = "admin/category/index", IconCss = ""},
+                    new Function() {Id = "COUNTRY", Name = "Country", ParentId = "STORY", SortOrder = 3, Status = Status.Active, Url = "/admin/country/index", IconCss = ""},
+                    new Function() {Id = "TRANSLATOR", Name = "Translator", ParentId = "STORY", SortOrder = 4, Status = Status.Active, Url = "/admin/translator", IconCss = "" }, 
+                    new Function() {Id = "CATEGORY", Name = "Category", ParentId = "STORY", SortOrder = 5, Status = Status.Active, Url = "/admin/category/index", IconCss = ""},
+
+                    new Function() {Id = "MEDIA", Name = "Media", ParentId = null, SortOrder = 1, Status = Status.Active, Url = "/", IconCss = ""},
+                    new Function() {Id = "IMAGE", Name = "Image", ParentId = "MEDIA", SortOrder = 1, Status = Status.Active, Url = "/admin/image/index", IconCss = ""},
+                    new Function() {Id = "BANNER", Name = "Banner", ParentId = "MEDIA", SortOrder = 2, Status = Status.Active, Url = "/admin/banner/index", IconCss = ""}
+
                 });
             }
 
