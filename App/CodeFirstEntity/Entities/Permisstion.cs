@@ -12,7 +12,7 @@ namespace story.App.CodeFirstEntity.Entities
         {
         }
 
-        public Permisstion(int id, Guid roleId, int functionId, bool create, bool read, bool delete, bool update, bool approved)
+        public Permisstion(int id, Guid roleId, string functionId, bool create, bool read, bool delete, bool update, bool approved)
         {
             Id = id;
             RoleId = roleId;
@@ -24,7 +24,7 @@ namespace story.App.CodeFirstEntity.Entities
             Approved = approved;
         }
 
-        public Permisstion(Guid roleId, int functionId, bool create, bool read, bool delete, bool update, bool approved)
+        public Permisstion(Guid roleId, string functionId, bool create, bool read, bool delete, bool update, bool approved)
         {
             RoleId = roleId;
             FunctionId = functionId;
@@ -54,7 +54,7 @@ namespace story.App.CodeFirstEntity.Entities
         public Guid RoleId { get; set; }
 
         [Required]
-        public int FunctionId { get; set; }
+        public string FunctionId { get; set; }
 
         [ForeignKey("RoleId")]
         public virtual AppRole Role { get; set; }

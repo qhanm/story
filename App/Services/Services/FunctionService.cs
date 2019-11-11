@@ -2,6 +2,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using story.App.AutoMapper;
+using story.App.CodeFirstEntity;
 using story.App.CodeFirstEntity.Entities;
 using story.App.Model;
 using story.App.Services.Repositories;
@@ -22,11 +23,14 @@ namespace story.App.Services.Services
 
         private readonly IMapper _mapper;
 
-        public FunctionService(IRepository<Function, string> repository, IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly AppDbContext _appDbContext;
+
+        public FunctionService(IRepository<Function, string> repository, IUnitOfWork unitOfWork, IMapper mapper, AppDbContext appDbContext)
         {
             _repository =  repository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _appDbContext = appDbContext;
         }
 
         public void Add(FunctionViewModel model)
@@ -62,6 +66,15 @@ namespace story.App.Services.Services
 
         public FunctionViewModel FindById(string id)
         {
+            throw new NotImplementedException();
+        }
+
+        public Task<FunctionViewModel> GetByPermission(Guid roleId)
+        {
+            var functions = _appDbContext.Functions.Join(_appDbContext.Permisstions,
+                                                        function => function.Id,
+                                                        permisstion => permisstion.FunctionId
+                                                        (function, permisstion) => new { Function = function, Permisstion = permisstion });
             throw new NotImplementedException();
         }
 

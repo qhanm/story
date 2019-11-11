@@ -14,11 +14,12 @@ namespace story.App.CodeFirstEntity
         {
             appDbContext.Database.EnsureCreated();
 
+            AppUser appUser = new AppUser();
+
             if (appDbContext.AppUsers.Count() == 0)
             {
                 PasswordHasher<string> passwordHasher = new PasswordHasher<string>();
 
-                AppUser appUser = new AppUser();
                 appUser.FullName = "Quach Hoai Nam";
                 appUser.UserName = "qhnam.67";
                 appUser.PasswordHash = passwordHasher.HashPassword(appUser.UserName, "123456!@#");
@@ -57,6 +58,250 @@ namespace story.App.CodeFirstEntity
                     new Function() {Id = "IMAGE", Name = "Image", ParentId = "MEDIA", SortOrder = 1, Status = Status.Active, Url = "/admin/image/index", IconCss = ""},
                     new Function() {Id = "BANNER", Name = "Banner", ParentId = "MEDIA", SortOrder = 2, Status = Status.Active, Url = "/admin/banner/index", IconCss = ""}
 
+                });
+            }
+
+            AppRole appRole = new AppRole();
+
+            if(appDbContext.AppRoles.Count() == 0)
+            {
+                appRole.Name = "SuperAdmin";
+                appRole.Description = "This is super admin";
+                appRole.Status = Status.Active;
+                appDbContext.Add(appRole);            }
+
+            if(appDbContext.UserRoles.Count() == 0 && !string.IsNullOrEmpty(appUser.Id.ToString()) && !string.IsNullOrEmpty(appRole.Id.ToString()))
+            {
+                IdentityUserRole<Guid> role = new IdentityUserRole<Guid>();
+
+                role.RoleId = appRole.Id;
+                role.UserId = appUser.Id;
+
+                appDbContext.Add(role);
+            }
+
+            if(appDbContext.Permisstions.Where(x => x.FunctionId.Contains("SYSTEM")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("SYSTEM")).Any()) 
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "SYSTEM",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("ROLE")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("ROLE")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "ROLE",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("FUNCTION")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("FUNCTION")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "FUNCTION",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("USER")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("USER")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "USER",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("ACTIVITY")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("ACTIVITY")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "ACTIVITY",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("ERROR")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("ERROR")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "ERROR",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("SETTING")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("SETTING")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "SETTING",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("STORY")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("STORY")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "STORY",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("COUNTRY")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("COUNTRY")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "COUNTRY",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("TRANSLATOR")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("TRANSLATOR")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "TRANSLATOR",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("CATEGORY")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("CATEGORY")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "CATEGORY",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("CHAPTER")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("CHAPTER")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "CHAPTER",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("COMMENT")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("COMMENT")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "COMMENT",
+                });
+            }
+
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("MEDIA")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("MEDIA")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "MEDIA",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("IMAGE")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("IMAGE")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "IMAGE",
+                });
+            }
+
+            if (appDbContext.Permisstions.Where(x => x.FunctionId.Contains("BANNER")).Any() && !string.IsNullOrEmpty(appRole.Id.ToString()) && appDbContext.Functions.Where(x => x.Id.Contains("BANNER")).Any())
+            {
+                appDbContext.Add(new Permisstion()
+                {
+                    Create = true,
+                    Read = true,
+                    Update = true,
+                    Delete = true,
+                    Approved = true,
+                    RoleId = appRole.Id,
+                    FunctionId = "BANNER",
                 });
             }
 
