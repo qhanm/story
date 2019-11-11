@@ -50,6 +50,8 @@ namespace story.App.CodeFirstEntity
                     new Function() {Id = "COUNTRY", Name = "Country", ParentId = "STORY", SortOrder = 3, Status = Status.Active, Url = "/admin/country/index", IconCss = ""},
                     new Function() {Id = "TRANSLATOR", Name = "Translator", ParentId = "STORY", SortOrder = 4, Status = Status.Active, Url = "/admin/translator", IconCss = "" }, 
                     new Function() {Id = "CATEGORY", Name = "Category", ParentId = "STORY", SortOrder = 5, Status = Status.Active, Url = "/admin/category/index", IconCss = ""},
+                    new Function() {Id = "CHAPTER", Name = "Chapter", ParentId = "STORY", SortOrder = 6, Status = Status.Active, Url = "/admin/chapter/index", IconCss = ""},
+                    new Function() {Id = "COMMENT", Name = "Comment", ParentId = "STORY", SortOrder = 7, Status = Status.Active, Url = "/admin/comment/index", IconCss = ""},
 
                     new Function() {Id = "MEDIA", Name = "Media", ParentId = null, SortOrder = 1, Status = Status.Active, Url = "/", IconCss = ""},
                     new Function() {Id = "IMAGE", Name = "Image", ParentId = "MEDIA", SortOrder = 1, Status = Status.Active, Url = "/admin/image/index", IconCss = ""},
