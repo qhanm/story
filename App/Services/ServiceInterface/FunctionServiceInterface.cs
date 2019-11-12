@@ -16,7 +16,7 @@ namespace story.App.Services.ServiceInterface
 
         FunctionViewModel FindById(string id);
 
-        Task<FunctionViewModel> GetByPermission(Guid roleId);
+        Task<List<FunctionViewModel>> GetByPermission(Guid roleId);
 
         List<FunctionViewModel> FindAll();
 

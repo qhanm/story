@@ -69,13 +69,17 @@ namespace story.App.Services.Services
             throw new NotImplementedException();
         }
 
-        public Task<FunctionViewModel> GetByPermission(Guid roleId)
+        public Task<List<FunctionViewModel>> GetByPermission(Guid roleId)
         {
-            var functions = _appDbContext.Functions.Join(_appDbContext.Permisstions,
-                                                        function => function.Id,
-                                                        permisstion => permisstion.FunctionId
-                                                        (function, permisstion) => new { Function = function, Permisstion = permisstion });
-            throw new NotImplementedException();
+            var functions = (from function in _appDbContext.Functions
+                             join permission in _appDbContext.Permisstions
+                             on function.Id equals permission.FunctionId
+                             where permission.RoleId == roleId
+                             select new { Function = function});
+
+            var functionViewModels = functions.ProjectTo<FunctionViewModel>(AutoMapperConfig.RegisterMapping()).ToListAsync();
+
+            return functionViewModels;
         }
 
         public void SaveChanges()

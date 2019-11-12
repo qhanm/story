@@ -28,10 +28,10 @@ namespace story.Areas.Admin.Components
 
             var appUser = _appUserServiceInterface.FindByIdNoMap(Guid.Parse(userId));
 
-            var role = _userManager.GetRolesAsync(appUser);
+            var roles = _userManager.GetRolesAsync(appUser);
 
 
-            return await Task.FromResult<IViewComponentResult>(View());
+            return await Task.FromResult<IViewComponentResult>(View(roles));
         }
     }
 }
