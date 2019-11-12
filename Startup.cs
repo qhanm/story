@@ -20,6 +20,8 @@ using AutoMapper;
 using Newtonsoft.Json.Serialization;
 using story.App.AutoMapper;
 using story.Extensions.Helpers;
+using story.App.Services.ServiceInterface;
+using story.App.Services.Services;
 
 namespace story
 {
@@ -67,6 +69,11 @@ namespace story
             IMapper mapper = mappingConfig.CreateMapper();
 
             services.AddSingleton(mapper);
+
+            services.AddTransient<IAppUserServiceInterface, AppUserService>();
+            services.AddTransient<IFunctionServiceInterface, FunctionService>();
+            services.AddTransient<IAppUserRoleServiceInterface, AppUserRoleService>();
+
             #endregion end config mapper
             //services.Configure<CookiePolicyOptions>(options =>
             //{

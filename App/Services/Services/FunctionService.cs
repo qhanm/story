@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace story.App.Services.Services
 {
-    public class FunctionService : FunctionServiceInterface
+    public class FunctionService : IFunctionServiceInterface
     {
 
         private readonly IRepository<Function, string> _repository;

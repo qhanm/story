@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace story.App.Services.ServiceInterface
 {
-    public interface FunctionServiceInterface : IDisposable
+    public interface IFunctionServiceInterface : IDisposable
     {
         void Add(FunctionViewModel model);
 

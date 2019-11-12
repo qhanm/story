@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace story.App.Services.ServiceInterface
 {
-    public interface AppRoleServiceInterface : IDisposable
+    public interface IAppRoleServiceInterface : IDisposable
     {
         void Add(AppRoleViewModel model);
 
         void Update(AppRoleViewModel model);
 
         // find 
-        AppRoleViewModel FindId(Guid ?id);
+        AppRoleViewModel FindId(Guid id);
 
         List<AppRoleViewModel> GetAll();
 

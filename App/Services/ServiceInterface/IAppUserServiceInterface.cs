@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace story.App.Services.ServiceInterface
 {
-    public interface AppUserServiceInterface : IDisposable
+    public interface IAppUserServiceInterface : IDisposable
     {
         void Add(AppUserViewModel model);
 

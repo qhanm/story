@@ -15,6 +15,7 @@ namespace story.App.AutoMapper
             CreateMap<AppUserViewModel, AppUser>().ConstructUsing(x => new AppUser(x.Id,x.FullName, x.Avatar, x.Email));
             CreateMap<AppRoleViewModel, AppRole>().ConstructUsing(x => new AppRole(x.Id, x.Name, x.Description, x.Status));
             CreateMap<FunctionViewModel, Function>().ConstructUsing(x => new Function(x.Id, x.Name, x.Url, x.IconCss, x.SortOrder, x.Status, x.ParentId));
+            CreateMap<AppUserRoleViewModel, AppUserRole>().ConstructUsing(x => new AppUserRole(x.UserId, x.RoleId));
         }
     }
 }

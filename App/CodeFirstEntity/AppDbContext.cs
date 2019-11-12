@@ -46,6 +46,8 @@ namespace story.App.CodeFirstEntity
 
         public DbSet<AppUser> AppUsers { get; set; }
 
+        public DbSet<AppUserRole> AppUserRoles { get; set; }
+
         public DbSet<Story> Stories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -56,11 +58,11 @@ namespace story.App.CodeFirstEntity
 
             builder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
 
-            builder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
+            //builder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
 
             builder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => new { x.UserId });
 
-            base.OnModelCreating(builder);
+            //base.OnModelCreating(builder);
         }
 
         public override int SaveChanges()
