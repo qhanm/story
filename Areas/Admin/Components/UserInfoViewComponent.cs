@@ -18,7 +18,7 @@ namespace story.Areas.Admin.Components
         {
             var email = ((ClaimsPrincipal)User).GetSpecificClaim("Email");
             var fullName = ((ClaimsPrincipal)User).GetSpecificClaim("FullName");
-            //string role = ((ClaimsPrincipal)User).GetSpecificClaim("Roles");
+            var role = ((ClaimsPrincipal)User).GetSpecificClaim("Roles");
             var userId = ((ClaimsPrincipal)User).GetSpecificClaim("UserId");
             var avatar = ((ClaimsPrincipal)User).GetSpecificClaim("Avatar");
 

@@ -58,9 +58,11 @@ namespace story.App.CodeFirstEntity
 
             builder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
 
-            //builder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
+            builder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
 
             builder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => new { x.UserId });
+
+            //builder.Entity<AppUserRole>().HasKey(x => new { x.RoleId, x.UserId });
 
             //base.OnModelCreating(builder);
         }

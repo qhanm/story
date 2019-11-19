@@ -69,6 +69,10 @@ namespace story.App.Services.Services
 
         private RoleManager<AppRole> _roleManager;
 
+        //private IRepository<AppRole, Guid> _repository;
+
+        //private IUnitOfWork _unitOfWork;
+
         public AppRoleService(AppDbContext appDbContext, RoleManager<AppRole> roleManager)
         {
             _appDbContext = appDbContext;
@@ -98,7 +102,11 @@ namespace story.App.Services.Services
 
         public List<AppRoleViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            var roles = _appDbContext.AppRoles.OrderBy(x => x.Id).ProjectTo<AppRoleViewModel>(AutoMapperConfig.RegisterMapping()).ToList();
+
+            //var roles = _repository.FindAll().OrderBy(x => x.Id).ProjectTo<AppRoleViewModel>(AutoMapperConfig.RegisterMapping()).ToList();
+
+            return roles;
         }
 
         public void SaveChange()

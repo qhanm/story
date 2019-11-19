@@ -73,6 +73,7 @@ namespace story
             services.AddTransient<IAppUserServiceInterface, AppUserService>();
             services.AddTransient<IFunctionServiceInterface, FunctionService>();
             services.AddTransient<IAppUserRoleServiceInterface, AppUserRoleService>();
+            services.AddTransient<IAppRoleServiceInterface, AppRoleService>();
 
             #endregion end config mapper
             //services.Configure<CookiePolicyOptions>(options =>

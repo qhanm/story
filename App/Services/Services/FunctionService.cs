@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using story.App.AutoMapper;
 using story.App.CodeFirstEntity;
+using story.App.CodeFirstEntity.Constant;
 using story.App.CodeFirstEntity.Entities;
 using story.App.Model;
 using story.App.Services.Repositories;
@@ -71,13 +72,25 @@ namespace story.App.Services.Services
 
         public Task<List<FunctionViewModel>> GetByPermission(Guid roleId)
         {
-            var functions = (from function in _appDbContext.Functions
-                             join permission in _appDbContext.Permisstions
-                             on function.Id equals permission.FunctionId
-                             where permission.RoleId == roleId
-                             select new { Function = function});
+            var functions = from function in _appDbContext.Functions
+                            join permission in _appDbContext.Permisstions
+                            on function.Id equals permission.FunctionId
+                            where permission.RoleId == roleId && function.Status == Status.Active &&
+                            (permission.Read == true || permission.Update == true || permission.Delete == true || permission.Create == true || permission.Approved == true)
+                            orderby function.SortOrder
+                            select new Function()
+                            {
+                                Id = function.Id,
+                                Name = function.Name,
+                                IconCss = function.IconCss,
+                                ParentId = function.ParentId,
+                                Url = function.Url,
+                                Status = function.Status,
+                                SortOrder = function.SortOrder
+                            };
 
             var functionViewModels = functions.ProjectTo<FunctionViewModel>(AutoMapperConfig.RegisterMapping()).ToListAsync();
+
 
             return functionViewModels;
         }

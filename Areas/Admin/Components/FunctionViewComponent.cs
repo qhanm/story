@@ -13,7 +13,7 @@ namespace story.Areas.Admin.Components
 {
     public class FunctionViewComponent : ViewComponent
     {
-        private readonly UserManager<AppUser> _userManager;
+        //private readonly UserManager<AppUser> _userManager;
 
         private IAppUserServiceInterface _appUserServiceInterface;
 
@@ -21,10 +21,10 @@ namespace story.Areas.Admin.Components
 
         private IAppUserRoleServiceInterface _appUserRoleServiceInterface;
 
-        public FunctionViewComponent(UserManager<AppUser> userManager, IAppUserServiceInterface appUserServiceInterface, 
-            IFunctionServiceInterface functionServiceInterface, IAppUserRoleServiceInterface appUserRoleServiceInterface)
+        public FunctionViewComponent(IAppUserServiceInterface appUserServiceInterface, IFunctionServiceInterface functionServiceInterface, 
+            IAppUserRoleServiceInterface appUserRoleServiceInterface)
         {
-            _userManager = userManager;
+            //_userManager = userManager;
             _appUserServiceInterface = appUserServiceInterface;
             _functionServiceInterface = functionServiceInterface;
             _appUserRoleServiceInterface = appUserRoleServiceInterface;
@@ -38,9 +38,9 @@ namespace story.Areas.Admin.Components
 
             var role = _appUserRoleServiceInterface.GetByUserId(appUser.Id);
 
-            var function = _functionServiceInterface.GetByPermission(role.RoleId);
+            var function = await _functionServiceInterface.GetByPermission(role.RoleId);
 
-            return await Task.FromResult<IViewComponentResult>(View(function));
+            return View(function);
         }
     }
 }

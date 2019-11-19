@@ -16,6 +16,7 @@ namespace story.App.AutoMapper
             CreateMap<AppRole, AppRoleViewModel>();
             CreateMap<Function, FunctionViewModel>();
             CreateMap<AppUserRole, AppUserRoleViewModel>();
+            CreateMap<Permisstion, PermissionViewModel>();
         }
     }
 }
