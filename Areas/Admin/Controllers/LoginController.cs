@@ -10,7 +10,7 @@ using story.Models.Account;
 
 namespace story.Areas.Admin.Controllers
 {
-    [Area(Route.Area)]
+    [Area(RouteConstant.Area)]
     public class LoginController : Controller
     {
         // https://forums.asp.net/t/2154504.aspx?InvalidOperationException+Unable+to+resolve+service+for+type+Microsoft+AspNetCore+Identity+UserManager+1+Microsoft+AspNetCore+Identity+IdentityUser+while+attempting+to+activate+Mobile+Areas+Identity+Pages+Account+RegisterModel+

@@ -89,24 +89,24 @@ namespace story.App.CodeFirstEntity
 
                 if (!appDbContext.Permisstions.Where(x => x.FunctionId.Contains("SYSTEM")).Any())
                 {
-                    appDbContext.Permisstions.AddRange(new List<Permisstion>()
+                    appDbContext.Permisstions.AddRange(new List<Permission>()
                     {
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "SYSTEM"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "ROLE"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "FUNCTION"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "USER"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "ACTIVITY"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "ERROR"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "SETTING"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "STORY"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "COUNTRY"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "TRANSLATOR"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "CATEGORY"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "CHAPTER"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "COMMENT"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "MEDIA"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "IMAGE"},
-                        new Permisstion() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "BANNER"}
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "SYSTEM"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "ROLE"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "FUNCTION"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "USER"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "ACTIVITY"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "ERROR"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "SETTING"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "STORY"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "COUNTRY"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "TRANSLATOR"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "CATEGORY"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "CHAPTER"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "COMMENT"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "MEDIA"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "IMAGE"},
+                        new Permission() {Create = true, Read = true, Update = true, Delete = true, Approved = true, RoleId = appRole.Id, FunctionId = "BANNER"}
                     });
 
                  

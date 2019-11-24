@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace story.Extensions.Constants
 {
-    public static class Route
+    public static class StatusConstant
     {
-        public const string Area = "Admin";
+        public const string Active = "Active";
+
+        public const string Deactive = "Deactive";
     }
 }

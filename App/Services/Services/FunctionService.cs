@@ -53,7 +53,10 @@ namespace story.App.Services.Services
 
         public List<FunctionViewModel> FindAll()
         {
-            throw new NotImplementedException();
+            var functions = _repository.FindAll().ProjectTo<FunctionViewModel>(AutoMapperConfig.RegisterMapping()).ToList();
+
+            return functions;
+
         }
 
         public Task<List<FunctionViewModel>> FindAllAsync()

@@ -19,12 +19,12 @@ using story;
 #line default
 #line hidden
 #line 2 "C:\.NetCoreLive\qhnam.story\story\story\Views\_ViewImports.cshtml"
-using story.Models;
+using story.App.Model;
 
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"99464617055fdb505bb0bb7fd91f9b14f7b0d030", @"/Views/Home/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7bdec5254feef73df311f0fa7cf5fa82f43bad04", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8debe97316c483b546672d4b30415a331e346d16", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

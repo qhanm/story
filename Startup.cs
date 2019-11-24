@@ -22,6 +22,8 @@ using story.App.AutoMapper;
 using story.Extensions.Helpers;
 using story.App.Services.ServiceInterface;
 using story.App.Services.Services;
+using Microsoft.AspNetCore.Authorization;
+using story.Authorization;
 
 namespace story
 {
@@ -47,9 +49,12 @@ namespace story
             }).AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
-            services.AddIdentityCore<LoginViewModel>().AddDefaultTokenProviders();
+            services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
-            services.AddScoped<RoleManager<LoginViewModel>>();
+            //services.AddIdentityCore<LoginViewModel>().AddDefaultTokenProviders();
+
+            //services.AddScoped<RoleManager<LoginViewModel>>();
 
             services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
@@ -74,7 +79,7 @@ namespace story
             services.AddTransient<IFunctionServiceInterface, FunctionService>();
             services.AddTransient<IAppUserRoleServiceInterface, AppUserRoleService>();
             services.AddTransient<IAppRoleServiceInterface, AppRoleService>();
-
+            services.AddTransient<IPermissionServiceInterface, PermissionService>();
             #endregion end config mapper
             //services.Configure<CookiePolicyOptions>(options =>
             //{
@@ -89,6 +94,8 @@ namespace story
             //services.AddDefaultIdentity<IdentityUser>()
             //    .AddDefaultUI(UIFramework.Bootstrap4)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddTransient<IAuthorizationHandler, BaseManagerAuthorizationHandler>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());

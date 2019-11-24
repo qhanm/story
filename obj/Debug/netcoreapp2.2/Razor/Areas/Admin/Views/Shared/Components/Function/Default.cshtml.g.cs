@@ -19,17 +19,22 @@ using story;
 #line default
 #line hidden
 #line 2 "C:\.NetCoreLive\qhnam.story\story\story\Areas\Admin\Views\_ViewImports.cshtml"
-using story.Models;
-
-#line default
-#line hidden
-#line 3 "C:\.NetCoreLive\qhnam.story\story\story\Areas\Admin\Views\_ViewImports.cshtml"
 using story.App.Model;
 
 #line default
 #line hidden
+#line 3 "C:\.NetCoreLive\qhnam.story\story\story\Areas\Admin\Views\_ViewImports.cshtml"
+using story.App.CodeFirstEntity.Constant;
+
+#line default
+#line hidden
+#line 4 "C:\.NetCoreLive\qhnam.story\story\story\Areas\Admin\Views\_ViewImports.cshtml"
+using story.Extensions.Constants;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ff312c60f29f9905487319b852b867f3c7564c1e", @"/Areas/Admin/Views/Shared/Components/Function/Default.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6ac317c58b48f1d8a2862333eb2603faab2d1654", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"821becab1fb199858b748db723d0a8a899ed0aa7", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Shared_Components_Function_Default : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<FunctionViewModel>>
     {
         #pragma warning disable 1998

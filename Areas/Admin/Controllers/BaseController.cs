@@ -9,7 +9,7 @@ using story.Extensions.Constants;
 namespace story.Areas.Admin.Controllers
 {
     [Authorize]
-    [Area(Route.Area)]
+    [Area(RouteConstant.Area)]
     public class BaseController : Controller
     {
         

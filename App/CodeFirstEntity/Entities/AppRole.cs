@@ -19,12 +19,14 @@ namespace story.App.CodeFirstEntity.Entities
             Description = description;
         }
 
-        public AppRole(Guid id, string name, string desciption, Status status)
+        public AppRole(Guid id, string name, string desciption, Status status, DateTime dateCreated, DateTime dateUpdated)
         {
             Id = id;
             Name = name;
             Description = desciption;
             Status = status;
+            DateCreated = dateCreated;
+            DateUpdated = dateUpdated;
         }
 
         [StringLength(200)]

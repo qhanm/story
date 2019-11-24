@@ -1,0 +1,162 @@
+﻿@model Tuple<AppRoleViewModel, PermissionViewModel>
+@{ 
+    List<FunctionViewModel> functionViewModels = ViewBag.Functions as List<FunctionViewModel>;
+}
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h2>Admin <small>Role</small></h2>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h3>Create</h3>
+                        <ul class="nav navbar-right panel_toolbox">
+                            
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" method="post">
+                            <div asp-validation-summary="@ValidationSummary.ModelOnly"></div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.Item1.Name">
+                                    Name <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="@Model.Item1.Name" class="form-control col-md-7 col-xs-12">
+                                    <span asp-validation-for="@Model.Item1.Name"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.Item1.Description">
+                                    Description <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="@Model.Item1.Description" class="form-control col-md-7 col-xs-12">
+                                    <span asp-validation-for="@Model.Item1.Description"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.Item1.Status">
+                                    Status <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" >
+                                    <select class="form-control" asp-for="@Model.Item1.Status" asp-items="@ViewBag.StatusSelectListItem">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            
+                            <div class="row">
+                                <h3>Permission</h3>
+                                <div class="row">
+                                    <div class="col-md-8 pull-right">
+                                        <div class="col-md-2">
+                                            All
+                                        </div>
+                                        <div class="col-md-2">
+                                            Read
+                                        </div>
+                                        <div class="col-md-2">
+                                            Update
+                                        </div>
+                                        <div class="col-md-2">
+                                            Create
+                                        </div>
+                                        <div class="col-md-2">
+                                            Deleted
+                                        </div>
+                                        <div class="col-md-2">
+                                            Approved
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="to_do">
+
+                                    @foreach (var function in functionViewModels.Where(x => string.IsNullOrEmpty(x.ParentId)))
+                                    {
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-4"><h4>@function.Name</h4></div>
+                                                <div class="col-md-8">
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox" name="name" value="" />
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox" name="name" value="" />
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox" name="name" value="" />
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox" name="name" value="" />
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox" name="name" value="" />
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox" name="name" value="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if (functionViewModels.Where(x => x.ParentId == function.ParentId).Any())
+                                            {
+                                               
+                                                @foreach (var func in functionViewModels.Where(x => x.ParentId == function.Id))
+                                                {
+                                                    <li>
+                                                        <div class="row">
+                                                            <div class="col-md-4"><label style="margin-left:40px;">@func.Name</label></div>
+                                                            <div class="col-md-8">
+                                                                <div class="col-md-2">
+                                                                    <input type="checkbox" name="name" value="" />
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="checkbox" name="name" value="" />
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="checkbox" name="name" value="" />
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="checkbox" name="name" value="" />
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="checkbox" name="name" value="" />
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="checkbox" name="name" value="" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                }
+                                               
+
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+

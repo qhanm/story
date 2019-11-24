@@ -43,3 +43,8 @@ C:\.NetCoreLive\qhnam.story\story\story\obj\Debug\netcoreapp2.2\Razor\Areas\admi
 C:\.NetCoreLive\qhnam.story\story\story\obj\Debug\netcoreapp2.2\story.csprojAssemblyReference.cache
 C:\.NetCoreLive\qhnam.story\story\story\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Shared\Components\Function\Default.cshtml.g.cs
 C:\.NetCoreLive\qhnam.story\story\story\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\AppRole\Index.cshtml.g.cs
+C:\.NetCoreLive\qhnam.story\story\story\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Shared\Errors\PageNotFoundViewResult.cshtml.g.cs
+C:\.NetCoreLive\qhnam.story\story\story\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\PageError\PageNotFound.cshtml.g.cs
+C:\.NetCoreLive\qhnam.story\story\story\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\PageError\PageForbidden.cshtml.g.cs
+C:\.NetCoreLive\qhnam.story\story\story\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\AppRole\Show.cshtml.g.cs
+C:\.NetCoreLive\qhnam.story\story\story\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\AppRole\Create.cshtml.g.cs

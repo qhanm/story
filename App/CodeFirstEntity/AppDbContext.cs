@@ -40,7 +40,7 @@ namespace story.App.CodeFirstEntity
 
         public DbSet<KindStory> KindStories { get; set; }
 
-        public DbSet<Permisstion> Permisstions { get; set; }
+        public DbSet<Permission> Permisstions { get; set; }
 
         public DbSet<AppRole> AppRoles { get; set; }
 

@@ -6,13 +6,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace story.App.CodeFirstEntity.Entities
 {
     [Table("Permisstions")]
-    public class Permisstion : PrivateKey<int>
+    public class Permission : PrivateKey<int>
     {
-        public Permisstion()
+        public Permission()
         {
         }
 
-        public Permisstion(int id, Guid roleId, string functionId, bool create, bool read, bool delete, bool update, bool approved)
+        public Permission(int id, Guid roleId, string functionId, bool create, bool read, bool delete, bool update, bool approved)
         {
             Id = id;
             RoleId = roleId;
@@ -24,7 +24,7 @@ namespace story.App.CodeFirstEntity.Entities
             Approved = approved;
         }
 
-        public Permisstion(Guid roleId, string functionId, bool create, bool read, bool delete, bool update, bool approved)
+        public Permission(Guid roleId, string functionId, bool create, bool read, bool delete, bool update, bool approved)
         {
             RoleId = roleId;
             FunctionId = functionId;

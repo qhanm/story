@@ -19,7 +19,7 @@ using story;
 #line default
 #line hidden
 #line 2 "C:\.NetCoreLive\qhnam.story\story\story\Views\_ViewImports.cshtml"
-using story.Models;
+using story.App.Model;
 
 #line default
 #line hidden
@@ -29,7 +29,7 @@ using Microsoft.AspNetCore.Identity;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1a136f407ef313ec768eacc84c144cd823fb2aef", @"/Views/Shared/_LoginPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7bdec5254feef73df311f0fa7cf5fa82f43bad04", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8debe97316c483b546672d4b30415a331e346d16", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__LoginPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("nav-link text-dark"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -77,7 +77,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("    <li class=\"nav-item\">\r\n        ");
             EndContext();
             BeginContext(239, 129, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a136f407ef313ec768eacc84c144cd823fb2aef6544", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a136f407ef313ec768eacc84c144cd823fb2aef6547", async() => {
                 BeginContext(338, 6, true);
                 WriteLiteral("Hello ");
                 EndContext();
@@ -113,7 +113,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        ");
             EndContext();
             BeginContext(416, 253, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a136f407ef313ec768eacc84c144cd823fb2aef8773", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a136f407ef313ec768eacc84c144cd823fb2aef8776", async() => {
                 BeginContext(560, 102, true);
                 WriteLiteral("\r\n            <button  type=\"submit\" class=\"nav-link btn btn-link text-dark\">Logout</button>\r\n        ");
                 EndContext();
@@ -163,7 +163,7 @@ else
             WriteLiteral("    <li class=\"nav-item\">\r\n        ");
             EndContext();
             BeginContext(729, 91, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a136f407ef313ec768eacc84c144cd823fb2aef12148", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a136f407ef313ec768eacc84c144cd823fb2aef12151", async() => {
                 BeginContext(808, 8, true);
                 WriteLiteral("Register");
                 EndContext();
@@ -188,7 +188,7 @@ else
             WriteLiteral("\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        ");
             EndContext();
             BeginContext(868, 85, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a136f407ef313ec768eacc84c144cd823fb2aef13854", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a136f407ef313ec768eacc84c144cd823fb2aef13857", async() => {
                 BeginContext(944, 5, true);
                 WriteLiteral("Login");
                 EndContext();

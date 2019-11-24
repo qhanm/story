@@ -96,8 +96,9 @@ namespace story.App.Services.Services
 
         public AppRoleViewModel FindId(Guid id)
         {
-            //var role = _appDbContext.AppUserRoles.Where(x => x.UserId)
-            throw new NotImplementedException();
+            var role = _appDbContext.Roles.Where(x => x.Id == id).ProjectTo<AppRoleViewModel>(AutoMapperConfig.RegisterMapping()).FirstOrDefault();
+
+            return role;
         }
 
         public List<AppRoleViewModel> GetAll()

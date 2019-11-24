@@ -1,0 +1,155 @@
+﻿@model AppRoleViewModel
+
+@{
+    List<PermissionViewModel> permissions = ViewBag.Permission as List<PermissionViewModel>;
+}
+
+@{
+    ViewData["Title"] = "Show";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h2>Admin <small>Role</small></h2>
+                
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>View: @Model.Name</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a href="@RouteConstant.RoleIndex" class="navbar-right btn btn-default">Back</a></li>
+                        </ul>
+                        
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br>
+                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Name
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label>@Model.Name</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                    Description
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label>@Model.Description</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="middle-name" class="col-md-3 col-sm-3 col-xs-12">
+                                    Last Updated
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label>@Model.DateUpdated</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-3 col-xs-12">Status</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @if (Model.Status == Status.Active)
+                                    {
+                                        <button type='button' class='btn btn-success btn-xs'>Active</button>
+                                    }
+                                    else
+                                    {
+                                        <button type='button' class='btn btn-danger btn-xs'>Deactive</button>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                        </form>
+
+                        <div class="clearfix"></div>
+                        <h2>Permission: @Model.Name</h2>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Function</th>
+                                    <th>Read</th>
+                                    <th>Create</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                    <th>Approved</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in permissions)
+                                {
+                                    <tr>
+                                        <th scope="row">@p.FunctionId</th>
+                                        <td>
+                                            @if (p.Read)
+                                            {
+                                                <i class="fa fa-check" style=" color: green;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-close" style="color: red;"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (p.Create)
+                                            {
+                                                <i class="fa fa-check" style=" color: green;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-close" style="color: red;"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (p.Update)
+                                            {
+                                                <i class="fa fa-check" style=" color: green;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-close" style="color: red;"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (p.Delete)
+                                            {
+                                                <i class="fa fa-check" style=" color: green;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-close" style="color: red;"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (p.Approved)
+                                            {
+                                                <i class="fa fa-check" style=" color: green;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-close" style="color: red;"></i>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+

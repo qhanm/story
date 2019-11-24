@@ -16,23 +16,21 @@ namespace story.Areas.Admin.Components
     {
         public async Task<IViewComponentResult> InvokeAsync(string position)
         {
-            var email = ((ClaimsPrincipal)User).GetSpecificClaim("Email");
             var fullName = ((ClaimsPrincipal)User).GetSpecificClaim("FullName");
             var role = ((ClaimsPrincipal)User).GetSpecificClaim("Roles");
-            var userId = ((ClaimsPrincipal)User).GetSpecificClaim("UserId");
             var avatar = ((ClaimsPrincipal)User).GetSpecificClaim("Avatar");
+
 
             AppUserViewModel appUserViewModel = new AppUserViewModel()
             {
-                FullName = fullName,
-                Email = email,
                 Avatar = avatar,
-                Id = Guid.Parse(userId)
-             };
+                FullName = fullName
+            };
 
             ViewBag.Position = position;
             //return View(appUserViewModel);
             return await Task.FromResult<IViewComponentResult>(View(appUserViewModel));
+
         }
     }
 }
