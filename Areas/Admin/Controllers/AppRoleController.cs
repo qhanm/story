@@ -9,6 +9,7 @@ using story.Authorization;
 using story.Extensions.Constants;
 using System.Dynamic;
 using story.Extensions.Helpers.GenerricHtml;
+using story.App.Model;
 
 namespace story.Areas.Admin.Controllers
 {
@@ -70,6 +71,16 @@ namespace story.Areas.Admin.Controllers
             var functions = _functionService.FindAll();
             ViewBag.StatusSelectListItem = StatusList.GetList();
             ViewBag.Functions = functions;
+            ViewBag.Roles = new AppRoleViewModel();
+            return View();
+        }
+
+        [HttpPost(RouteConstant.RoleSaveChanges)]
+        public IActionResult SaveChanges()
+        {
+            var request = HttpContext.Request.Form;
+
+            var r1 = Request.Body;
 
             return View();
         }

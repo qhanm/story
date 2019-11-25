@@ -19,6 +19,7 @@
     <link href="~/admin/templates/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="~/admin/templates/build/css/custom.min.css" rel="stylesheet">
+    <link href="~/admin/templates/build/css/style.css" rel="stylesheet" />
 </head>
 
 <body class="nav-md">
@@ -108,5 +109,7 @@
     <script src="~/admin/templates/vendors/fastclick/lib/fastclick.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="~/admin/templates/build/js/custom.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>

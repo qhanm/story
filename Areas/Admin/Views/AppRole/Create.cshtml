@@ -1,6 +1,9 @@
-﻿@model Tuple<AppRoleViewModel, PermissionViewModel>
-@{ 
+﻿@{ 
     List<FunctionViewModel> functionViewModels = ViewBag.Functions as List<FunctionViewModel>;
+    //List<PermissionViewModel> permissionViewModels = Model.Item2. as List<PermissionViewModel>;
+    List<PermissionViewModel> permissionViewModels = new List<PermissionViewModel>();
+
+    AppRoleViewModel appRoleViewModel = ViewBag.Roles as AppRoleViewModel;
 }
 
 
@@ -28,34 +31,34 @@
                     </div>
                     <div class="x_content">
                         <br>
-                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" method="post">
-                            <div asp-validation-summary="@ValidationSummary.ModelOnly"></div>
+                        <form action="@(RouteConstant.RoleSaveChanges)" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" method="post">
+                            <div asp-validation-summary="@ValidationSummary.All"></div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.Item1.Name">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@appRoleViewModel.Name">
                                     Name <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input asp-for="@Model.Item1.Name" class="form-control col-md-7 col-xs-12">
-                                    <span asp-validation-for="@Model.Item1.Name"></span>
+                                    <input asp-for="@appRoleViewModel.Name" class="form-control col-md-7 col-xs-12">
+                                    <span asp-validation-for="@appRoleViewModel.Name"></span>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.Item1.Description">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@appRoleViewModel.Description">
                                     Description <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input asp-for="@Model.Item1.Description" class="form-control col-md-7 col-xs-12">
-                                    <span asp-validation-for="@Model.Item1.Description"></span>
+                                    <input asp-for="@appRoleViewModel.Description" class="form-control col-md-7 col-xs-12">
+                                    <span asp-validation-for="@appRoleViewModel.Description"></span>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@Model.Item1.Status">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@appRoleViewModel.Status">
                                     Status <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12" >
-                                    <select class="form-control" asp-for="@Model.Item1.Status" asp-items="@ViewBag.StatusSelectListItem">
+                                    <select class="form-control" asp-for="@appRoleViewModel.Status" asp-items="@ViewBag.StatusSelectListItem">
                                     </select>
                                 </div>
                             </div>
@@ -95,62 +98,66 @@
                                                 <div class="col-md-4"><h4>@function.Name</h4></div>
                                                 <div class="col-md-8">
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" name="name" value="" />
+                                                        <input type="checkbox" class="flat checkFlat" id="permission-all-@(function.Id)" name="permission[@(function.Id)][All]" value="0" />
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" name="name" value="" />
+                                                        <input type="checkbox" class="flat checkFlat" id="permission-read-@(function.Id)" name="permission[@(function.Id)][ReadAll]" value="0" />
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" name="name" value="" />
+                                                        <input type="checkbox" class="flat checkFlat" id="permission-update-@(function.Id)" name="permission[@(function.Id)][UpdateAll]" value="0" />
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" name="name" value="" />
+                                                        <input type="checkbox" class="flat checkFlat" id="permission-create-@(function.Id)" name="permission[@(function.Id)]Create[All]" value="0" />
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" name="name" value="" />
+                                                        <input type="checkbox" class="flat checkFlat" id="permission-delete-@(function.Id)" name="permission[@(function.Id)][DeleteAll]" value="0" />
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" name="name" value="" />
+                                                        <input type="checkbox" class="flat checkFlat" id="permission-approved-@(function.Id)" name="permission[@(function.Id)][ApprovedAll]" value="0" />
                                                     </div>
                                                 </div>
                                             </div>
-                                            @if (functionViewModels.Where(x => x.ParentId == function.ParentId).Any())
+                                        </li>
+                                        @if (functionViewModels.Where(x => x.ParentId == function.ParentId).Any())
+                                        {
+
+                                            @foreach (var func in functionViewModels.Where(x => x.ParentId == function.Id))
                                             {
-                                               
-                                                @foreach (var func in functionViewModels.Where(x => x.ParentId == function.Id))
-                                                {
-                                                    <li>
-                                                        <div class="row">
-                                                            <div class="col-md-4"><label style="margin-left:40px;">@func.Name</label></div>
-                                                            <div class="col-md-8">
-                                                                <div class="col-md-2">
-                                                                    <input type="checkbox" name="name" value="" />
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <input type="checkbox" name="name" value="" />
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <input type="checkbox" name="name" value="" />
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <input type="checkbox" name="name" value="" />
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <input type="checkbox" name="name" value="" />
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <input type="checkbox" name="name" value="" />
-                                                                </div>
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="col-md-4"><label style="margin-left:40px;">@func.Name</label></div>
+                                                        <div class="col-md-8">
+                                                            <div class="col-md-2">
+                                                                <input type="checkbox" class="flat checkFlat permission-all-@(func.Id)" name="permission[@(func.Id)][All]" value="0" />
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input type="checkbox" class="flat checkFlat permission-read-@(func.Id)" name="permission[@(func.Id)][Read]" value="0" />
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input type="checkbox" class="flat checkFlat permission-update-@(func.Id)" name="permission[@(func.Id)][Update]" value="0" />
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input type="checkbox" class="flat checkFlat permission-create-@(func.Id)" name="permission[@(func.Id)][Create]" value="0" />
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input type="checkbox" class="flat checkFlat permission-delete-@(func.Id)" name="permission[@(func.Id)][Delete]" value="0" />
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input type="checkbox" class="flat checkFlat permission-approved-@(func.Id)" name="permission[@(func.Id)][Approved]" value="0" />
                                                             </div>
                                                         </div>
-                                                    </li>
-                                                }
-                                               
-
+                                                    </div>
+                                                </li>
                                             }
-                                        </li>
+                                        }
                                     }
                                 </ul>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -160,3 +167,11 @@
 
     </div>
 
+@section Scripts{ 
+    <script src="~/app/controllers/approle/create.js"></script>
+
+    <script>
+        var createAppRole = new CreateAppRole();
+        createAppRole.Initial();
+    </script>
+}

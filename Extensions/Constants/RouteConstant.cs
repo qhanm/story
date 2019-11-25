@@ -20,6 +20,7 @@ namespace story.Extensions.Constants
         public const string RoleView = "/admin/role/view";
         public const string RoleUpdate = "/admin/role/update";
         public const string RoleDelete = "/admin/role/delete";
+        public const string RoleSaveChanges = "/admin/role/savechanges";
 
     }
 }
