@@ -31,8 +31,8 @@
                     </div>
                     <div class="x_content">
                         <br>
-                        <form action="@(RouteConstant.RoleSaveChanges)" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" method="post">
-                            <div asp-validation-summary="@ValidationSummary.All"></div>
+                        <form id="frmCreate" class="form-horizontal form-label-left">
+                            @*<div asp-validation-summary="@ValidationSummary.All"></div>*@
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="@appRoleViewModel.Name">
                                     Name <span class="required">*</span>
@@ -98,22 +98,22 @@
                                                 <div class="col-md-4"><h4>@function.Name</h4></div>
                                                 <div class="col-md-8">
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" class="flat checkFlat" id="permission-all-@(function.Id)" name="permission[@(function.Id)][All]" value="0" />
+                                                        <input type="checkbox" class="flat checkFlat" data-parent="all-@(function.Id)" id="permission-all-@(function.Id)" name="permission.@(function.Id).All" value="0" />
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" class="flat checkFlat" id="permission-read-@(function.Id)" name="permission[@(function.Id)][ReadAll]" value="0" />
+                                                        <input type="checkbox" class="flat checkFlat" data-parent="read-@(function.Id)" id="permission-read-@(function.Id)" name="permission.@(function.Id).ReadAll" value="0" />
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" class="flat checkFlat" id="permission-update-@(function.Id)" name="permission[@(function.Id)][UpdateAll]" value="0" />
+                                                        <input type="checkbox" class="flat checkFlat" data-parent="update-@(function.Id)" id="permission-update-@(function.Id)" name="permission.@(function.Id).UpdateAll" value="0" />
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" class="flat checkFlat" id="permission-create-@(function.Id)" name="permission[@(function.Id)]Create[All]" value="0" />
+                                                        <input type="checkbox" class="flat checkFlat" data-parent="create-@(function.Id)" id="permission-create-@(function.Id)" name="permission.@(function.Id).CreateAll" value="0" />
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" class="flat checkFlat" id="permission-delete-@(function.Id)" name="permission[@(function.Id)][DeleteAll]" value="0" />
+                                                        <input type="checkbox" class="flat checkFlat" data-parent="delete-@(function.Id)" id="permission-delete-@(function.Id)" name="permission.@(function.Id).DeleteAll." value="0" />
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" class="flat checkFlat" id="permission-approved-@(function.Id)" name="permission[@(function.Id)][ApprovedAll]" value="0" />
+                                                        <input type="checkbox" class="flat checkFlat" data-parent="approved-@(function.Id)" id="permission-approved-@(function.Id)" name="permission.@(function.Id).ApprovedAll." value="0" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,22 +128,22 @@
                                                         <div class="col-md-4"><label style="margin-left:40px;">@func.Name</label></div>
                                                         <div class="col-md-8">
                                                             <div class="col-md-2">
-                                                                <input type="checkbox" class="flat checkFlat permission-all-@(func.Id)" name="permission[@(func.Id)][All]" value="0" />
+                                                                <input type="checkbox" data-child="permission-all-@(function.Id)" id="permission-all-@(func.Id)" class="flat checkFlat permission-all-@(function.Id)" name="permission.@(func.Id).All." value="0" />
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input type="checkbox" class="flat checkFlat permission-read-@(func.Id)" name="permission[@(func.Id)][Read]" value="0" />
+                                                                <input type="checkbox" data-child="permission-all-@(function.Id)" id="permission-read-@(func.Id)" class="flat checkFlat permission-read-@(function.Id)" name="permission.@(func.Id).Read" value="0" />
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input type="checkbox" class="flat checkFlat permission-update-@(func.Id)" name="permission[@(func.Id)][Update]" value="0" />
+                                                                <input type="checkbox" data-child="permission-all-@(function.Id)" id="permission-update-@(func.Id)" class="flat checkFlat permission-update-@(function.Id)" name="permission.@(func.Id).Update." value="0" />
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input type="checkbox" class="flat checkFlat permission-create-@(func.Id)" name="permission[@(func.Id)][Create]" value="0" />
+                                                                <input type="checkbox" data-child="permission-all-@(function.Id)" id="permission-create-@(func.Id)" class="flat checkFlat permission-create-@(function.Id)" name="permission.@(func.Id).Create." value="0" />
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input type="checkbox" class="flat checkFlat permission-delete-@(func.Id)" name="permission[@(func.Id)][Delete]" value="0" />
+                                                                <input type="checkbox" data-child="permission-all-@(function.Id)" id="permission-delete-@(func.Id)" class="flat checkFlat permission-delete-@(function.Id)" name="permission.@(func.Id).Delete" value="0" />
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input type="checkbox" class="flat checkFlat permission-approved-@(func.Id)" name="permission[@(func.Id)][Approved]" value="0" />
+                                                                <input type="checkbox" data-child="permission-all-@(function.Id)" id="permission-approved-@(func.Id)" class="flat checkFlat permission-approved-@(function.Id)" name="permission.@(func.Id).Approved" value="0" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -155,7 +155,7 @@
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="button" id="btnSubmit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>
                             </div>
