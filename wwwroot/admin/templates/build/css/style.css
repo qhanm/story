@@ -299,3 +299,14 @@ body {
     top: 0;
     width: 100px;
 }
+
+.validation-summary-errors ul {
+    list-style: none;
+    margin-left: 0px;
+    padding-left: 0px;
+    color: red;
+}
+
+.validation-summary-errors ul li {
+    padding: 3px 0px;
+}

@@ -1,11 +1,15 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Identity;
 using story.App.AutoMapper;
 using story.App.CodeFirstEntity;
+using story.App.CodeFirstEntity.Constant;
 using story.App.CodeFirstEntity.Entities;
 using story.App.Model;
 using story.App.Services.Repositories;
 using story.App.Services.ServiceInterface;
+using story.Extensions.Constants;
+using story.Extensions.Helpers.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,77 +20,41 @@ namespace story.App.Services.Services
     public class AppRoleService : IAppRoleServiceInterface
     {
 
-        //private readonly IRepository<AppRole, Guid> _repository;
-
-        //private readonly IUnitOfWork _unitOfWork;
-
-        //public AppRoleService(IRepository<AppRole, Guid> repository, IUnitOfWork unitOfWork)
-        //{
-        //    _repository = repository;
-        //    _unitOfWork = unitOfWork;
-        //}
-
-        //public void Add(AppRoleViewModel model)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Delete(Guid id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Dispose()
-        //{
-        //    GC.SuppressFinalize(this);
-        //}
-
-        //public AppRoleViewModel FindId(Guid? id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public List<AppRoleViewModel> GetAll()
-        //{
-        //    var appRoles = _repository.FindAll()
-        //                              .OrderBy(x => x.DateUpdated)
-        //                              .ProjectTo<AppRoleViewModel>(AutoMapperConfig.RegisterMapping())
-        //                              .ToList();
-        //    return appRoles;
-        //}
-
-        //public void SaveChange()
-        //{
-        //    _unitOfWork.Commit();
-        //}
-
-        //public void Update(AppRoleViewModel model)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         private readonly AppDbContext _appDbContext;
 
         private RoleManager<AppRole> _roleManager;
 
+        private IMapper _mapper;
+
         //private IRepository<AppRole, Guid> _repository;
 
-        //private IUnitOfWork _unitOfWork;
+        private IUnitOfWork _unitOfWork;
 
-        public AppRoleService(AppDbContext appDbContext, RoleManager<AppRole> roleManager)
+        public AppRoleService(AppDbContext appDbContext, RoleManager<AppRole> roleManager, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _appDbContext = appDbContext;
             _roleManager = roleManager;
+            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
-        public void Add(AppRoleViewModel model)
+        public AppRole Add(AppRoleViewModel model)
         {
-            throw new NotImplementedException();
+            var appRole = _mapper.Map<AppRoleViewModel, AppRole>(model);
+            _appDbContext.AppRoles.Add(appRole);
+            return appRole;
         }
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public void Delete(AppRoleViewModel appRoleViewModel)
+        {
+            var modelAppRole = _mapper.Map<AppRoleViewModel, AppRole>(appRoleViewModel);
+
+            _appDbContext.AppRoles.Remove(modelAppRole);
         }
 
         public void Dispose()
@@ -96,7 +64,7 @@ namespace story.App.Services.Services
 
         public AppRoleViewModel FindId(Guid id)
         {
-            var role = _appDbContext.Roles.Where(x => x.Id == id).ProjectTo<AppRoleViewModel>(AutoMapperConfig.RegisterMapping()).FirstOrDefault();
+            var role = _appDbContext.AppRoles.Where(x => x.Id == id).ProjectTo<AppRoleViewModel>(AutoMapperConfig.RegisterMapping()).FirstOrDefault();
 
             return role;
         }
@@ -110,14 +78,72 @@ namespace story.App.Services.Services
             return roles;
         }
 
-        public void SaveChange()
+        public PageResult<AppRoleViewModel> GetAll(Status status, string search, int pageCurrent, int pageSize)
         {
-            throw new NotImplementedException();
+            var query = _roleManager.Roles;
+
+            if(status != Status.All)
+            {
+                query = query.Where(x => x.Status == status);
+            }
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                query = query.Where(x => x.Name.Contains(search) || x.Description.Contains(search));
+            }
+
+            int totalPage = query.Count();
+
+            query = query.Skip((pageCurrent - 1) * pageSize).Take(pageSize);
+
+            
+
+            var resutl = query.ProjectTo<AppRoleViewModel>(AutoMapperConfig.RegisterMapping()).ToList();
+
+            var pageResult = new PageResult<AppRoleViewModel>()
+            {
+                PageCurrent = pageCurrent,
+                TotalPage = totalPage,
+                Results = resutl,
+                PageSize = pageSize,
+            };
+
+            return pageResult;
         }
 
-        public void Update(AppRoleViewModel model)
+        public bool IsUnique(string name, Guid roleId)
         {
-            throw new NotImplementedException();
+            var query = _appDbContext.AppRoles.Where(x => x.Name.Equals(name));
+
+            var guidDefault = default(Guid);
+
+            // is updated
+            if (roleId != guidDefault)
+            {
+                var role = FindId(roleId);
+
+                query = _appDbContext.AppRoles.Where(x => x.Name.Equals(name) && !x.Name.Equals(role.Name));
+            }
+
+            if(query.Count() > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public void SaveChange()
+        {
+            _unitOfWork.Commit();
+        }
+
+        public AppRole Update(AppRoleViewModel model)
+        {
+            var appRole = _mapper.Map<AppRoleViewModel, AppRole>(model);
+
+            _appDbContext.AppRoles.Update(appRole);
+            return appRole;
         }
     }
 }

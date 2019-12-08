@@ -9,5 +9,9 @@ namespace story.App.Services.ServiceInterface
     public interface IAppUserRoleServiceInterface : IDisposable
     {
         AppUserRoleViewModel GetByUserId(Guid userId);
+
+        void Add(AppUserRoleViewModel appUserRoleViewModel);
+
+        void SaveChanges();
     }
 }

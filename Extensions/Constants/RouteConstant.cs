@@ -21,6 +21,14 @@ namespace story.Extensions.Constants
         public const string RoleUpdate = "/admin/role/update";
         public const string RoleDelete = "/admin/role/delete";
         public const string RoleSaveChanges = "/admin/role/savechanges";
+        public const string RoleGetAppPermissionByRoleId = "/admin/role/get-permission-by-id";
 
+        // USERs
+        public const string UserIndex = "/admin/user/index";
+        public const string UserCreate = "/admin/user/create";
+        public const string UserUpdate = "/admin/user/update";
+        public const string UserView = "/admin/user/view";
+        public const string UserDelete = "/admin/user/delete";
+        public const string UserSaveChanges = "/admin/user/save-changes";
     }
 }

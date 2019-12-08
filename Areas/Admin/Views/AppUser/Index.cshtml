@@ -1,15 +1,12 @@
 ﻿@using story.Extensions.Helpers.Pagination
 @using story.Authorization
 @using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.Http
 @inject IAuthorizationService AuthorizationService
 
-@model PageResult<AppRoleViewModel>
-
-
+@model PageResult<AppUserViewModel>
 
 @{
-    ViewData["Title"] = "Roles | Index";
+    ViewData["Title"] = "User | Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -22,7 +19,7 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Admin <small>Roles</small></h3>
+            <h3>Admin <small>Users</small></h3>
         </div>
 
     </div>
@@ -36,32 +33,32 @@
                     @*<h2>Table design <small>Custom design</small></h2>*@
                     <div class="col-md-4">
                         @{
-                            var checkCreate = await AuthorizationService.AuthorizeAsync(User, FunctionConstant.Role, Operations.Create);
+                            var checkCreate = await AuthorizationService.AuthorizeAsync(User, FunctionConstant.User, Operations.Create);
 
-                            var checkUpdate = await AuthorizationService.AuthorizeAsync(User, FunctionConstant.Role, Operations.Update);
+                            var checkUpdate = await AuthorizationService.AuthorizeAsync(User, FunctionConstant.User, Operations.Update);
 
-                            var checkDelete = await AuthorizationService.AuthorizeAsync(User, FunctionConstant.Role, Operations.Delete);
+                            var checkDelete = await AuthorizationService.AuthorizeAsync(User, FunctionConstant.User, Operations.Delete);
 
-                            var checkRead = await AuthorizationService.AuthorizeAsync(User, FunctionConstant.Role, Operations.Read);
+                            var checkRead = await AuthorizationService.AuthorizeAsync(User, FunctionConstant.User, Operations.Read);
 
                             if (checkCreate.Succeeded)
                             {
 
                                 @*<button type="button" class="btn btn-success"><i class="fa fa-download"></i> Import</button>
                                     <button type="button" class="btn btn-success"><i class="fa fa-cloud-upload"></i> Export</button>*@
-                                <a href="@RouteConstant.RoleCreate" class="btn btn-success"><i class="fa fa-external-link"></i> Create</a>
+                                <a href="@RouteConstant.UserCreate" class="btn btn-success"><i class="fa fa-external-link"></i> Create</a>
                             }
 
 
                         }
                     </div>
                     <div class="col-md-8">
-                        <form action="/admin/role/index" method="get">
+                        <form action="/admin/user/index" method="get">
                             <div class="col-md-3">
                                 <select name="pageSize" class="form-control pull-right" asp-items="@ViewBag.PaginationSelectListItem" style="width:80px">
                                     @*<option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="25">50</option>*@
+                                        <option value="20">20</option>
+                                        <option value="25">50</option>*@
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -92,10 +89,12 @@
                                     <th>
                                         <input type="checkbox" id="check-all" class="flat">
                                     </th>
-                                    <th class="column-title" style="display: table-cell;">Name </th>
-                                    <th class="column-title" style="display: table-cell;">Description </th>
-                                    <th class="column-title" style="display: table-cell;">Status </th>
+                                    <th class="column-title" style="display: table-cell;">UserName </th>
+                                    <th class="column-title" style="display: table-cell;">Full Name </th>
+                                    <th class="column-title" style="display: table-cell;">Phone Number </th>
+                                    <th class="column-title" style="display: table-cell;">Email </th>
                                     <th class="column-title" style="display: table-cell;">Last Updated </th>
+                                    <th class="column-title" style="display: table-cell;">Status </th>
 
                                     <th class="column-title no-link last" style="display: table-cell;">
                                         <span class="nobr">Action</span>
@@ -111,18 +110,21 @@
                                 @{
                                     int key = 0;
 
-                                    foreach (var role in Model.Results)
+                                    foreach (var user in Model.Results)
                                     {
                                         string trClass = key % 2 == 0 ? "even" : "odd";
                                         <tr class="@(trClass) pointer">
                                             <td class="a-center ">
                                                 <input type="checkbox" class="flat" name="table_records">
                                             </td>
-                                            <td class=" ">@role.Name</td>
-                                            <td class=" ">@role.Description</td>
-                                            <td class=" ">@role.DateCreted</td>
+                                            <td>@user.UserName</td>
+                                            <td class=" ">@user.FullName</td>
+                                            <td>@user.PhoneNumber</td>
+                                            <td class=" ">@user.Email</td>
+                                            <td class=" ">@user.DateUpdated</td>
+
                                             <td class=" ">
-                                                @if (role.Status == Status.Active)
+                                                @if (user.Status == Status.Active)
                                                 {
                                                     <button type='button' class='btn btn-success btn-xs'>Active</button>
                                                 }
@@ -135,16 +137,16 @@
                                             <td class="last">
                                                 @if (checkRead.Succeeded)
                                                 {
-                                                    <a href="@(RouteConstant.RoleView + "/" + role.Id)" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                                    <a href="@(RouteConstant.UserView + "/" + user.Id)" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
                                                 }
                                                 @if (checkUpdate.Succeeded)
                                                 {
-                                                    <a href="@(RouteConstant.RoleUpdate + "/" + role.Id)" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                                    <a href="@(RouteConstant.UserUpdate + "/" + user.Id)" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                                 }
                                                 @if (checkDelete.Succeeded)
                                                 {
-                                                    <input type="hidden" name="Id" value="@role.Id" />
-                                                    <button type="submit" data-id="@role.Id" class="btn btn-danger btn-xs btnDelete"><i class="fa fa-trash-o"></i> Delete </button>
+                                                    <input type="hidden" name="Id" value="@user.Id" />
+                                                    <button type="submit" data-id="@user.Id" class="btn btn-danger btn-xs btnDelete"><i class="fa fa-trash-o"></i> Delete </button>
                                                 }
                                             </td>
                                         </tr>
@@ -184,12 +186,5 @@
 
 @section Scripts{
     <script src="~/admin/templates/vendors/alertifyjs/alertify.js"></script>
-
-    <script src="~/app/controllers/approle/index.js"></script>
-    <script>
-        var indexAppRole = new IndexAppRole();
-        indexAppRole.Initial();
-    </script>
 }
-
 

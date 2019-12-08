@@ -15,14 +15,16 @@ namespace story.App.CodeFirstEntity.Entities
     {
         public AppUser() { }
 
-        public AppUser(Guid id, string fullName, string avatar, string email)
+        public AppUser(Guid id, string fullName, string avatar, string email, string userName, string password, string phoneNumber)
         {
             Id = id;
             FullName = fullName;
             Avatar = avatar;
             Email = email;
+            UserName = userName;
+            PasswordHash = password;
+            PhoneNumber = phoneNumber;
         }
-
 
         [Required]
         [StringLength(150)]

@@ -1,7 +1,10 @@
-﻿var CreateAppRole = function () {
+﻿var CreateAppRole = function (isUpdate) {
+
+    console.log(isUpdate);
 
     this.Initial = function () {
         registerEvent();
+        registerHadle();
     }
 
     registerEvent = function () {
@@ -56,17 +59,31 @@
 
         $(document).on("click", "#btnSubmit", function () {
             var modelFunctions = parseDataObjectCheckBoxList();
-            console.log(modelFunctions);
             var modelRole = parseDataSerializeToRoleModel();
+
+            modelFunctions = Object.assign(modelFunctions);
+
+            modelRole = Object.assign(modelRole);
+
+            modelFunctions = JSON.stringify(modelFunctions);
+
+            modelRole = JSON.stringify(modelRole);
+
             postData(modelFunctions, modelRole);
         })
     }
 
     registerHadle = function () {
-
+        if (isUpdate == 1)
+        {
+            getListPermission();
+        }
     }
 
     postData = function (modelFunctions, modelRole) {
+
+
+
         $.ajax({
             type: "POST",
             url: "/admin/role/savechanges",
@@ -76,9 +93,19 @@
             },
             dataType: "json",
             success: function (response) {
-
+                $("#errorContent").html("");
+                if (response.Status == 0) {
+                    $("#errorContent").html("<p class='text-danger'>" + response.Message + "</p>");
+                    alertify.error('An error occurred during processing');
+                } else {
+                    alertify.success('Create permission success');
+                    setTimeout(function () {
+                        location.href = "/admin/role/index";
+                    }, 1200);
+                }
             },
             error: function (response) {
+                alertify.error('An error occurred during processing');
                 console.log(responses);
             }
         })
@@ -136,11 +163,17 @@
             }
         })
 
+        var roleId = $("#role-id").val();
+
+        objResult.Id = roleId;
+
         return objResult;
     }
 
     parseDataObjectCheckBoxList = function ()
     {
+        var roleId = $("#role-id").val();
+
         var checkBoxList = [];
 
         $.each($('.checkFlat:checkbox'), function (k, v) {
@@ -170,7 +203,8 @@
 
                 if (value.action === "All")
                 {
-                    structFunction.Id = value.function;
+                    structFunction.FunctionId = value.function;
+                    structFunction.Id = $("#permission-all-" + value.function).data("value");
                 }
 
                 if (value.action === "UpdateAll" || value.action === "Update")
@@ -193,13 +227,20 @@
                 if (value.action === "ApprovedAll" || value.action === "Approved") {
                     structFunction.Approved = value.value;
                 }
+
+                structFunction.RoleId = roleId;
             })
             result.push(structFunction);
 
             listTemp.push(checkBoxList[i]["function"]);
         }
 
-        return result; 
+        var objectResut = {};
+
+        $.each(result, function (key, obj) {
+            objectResut[key] = obj;
+        })
+        return objectResut; 
     }
 
     // return object {actioncode(read, update, ...) => true || false}
@@ -223,5 +264,46 @@
                 break;
         }
         return result;
+    }
+
+    getListPermission = function ()
+    {
+        var permissionId = $("#role-id").val();
+
+        $.ajax({
+            type: "GET",
+            url: "/admin/role/get-permission-by-id/" + permissionId,
+            success: function (response) {
+                var datas = response.Datas;
+
+                $.each(datas, function (key, value) {
+                    if (value.Create == true && value.Function.ParentId !== null)
+                    {
+                        $("#permission-create-" + value.FunctionId).iCheck("check");
+                    }
+
+                    if (value.Read == true && value.Function.ParentId !== null) {
+                        $("#permission-read-" + value.FunctionId).iCheck("check");
+                    }
+
+                    if (value.Update == true && value.Function.ParentId !== null) {
+                        $("#permission-update-" + value.FunctionId).iCheck("check");
+                    }
+
+                    if (value.Delete == true && value.Function.ParentId !== null) {
+                        $("#permission-delete-" + value.FunctionId).iCheck("check");
+                    }
+
+                    if (value.Approved == true && value.Function.ParentId !== null) {
+                        $("#permission-approved-" + value.FunctionId).iCheck("check");
+                    }
+                })
+                
+            },
+            error: function (reponse) {
+                console.log(reponse);
+                alertify.error('An error occurred during processing');
+            }
+        })
     }
 }

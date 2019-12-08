@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using story.App.AutoMapper;
@@ -17,8 +18,6 @@ namespace story.App.Services.Services
 {
     public class PermissionService : IPermissionServiceInterface
     {
-        private readonly UserManager<AppUser> _userManager;
-
         private readonly RoleManager<AppRole> _roleManager;
 
         private readonly AppDbContext _appDbContext;
@@ -27,12 +26,26 @@ namespace story.App.Services.Services
 
         private readonly IRepository<Function, string> _repositoryFunction;
 
-        public PermissionService(IRepository<Permission, int> repositoryPermission, IRepository<Function, string> repositoryFunction, AppDbContext appDbContext, RoleManager<AppRole> roleManager)
+        private readonly IMapper _mapper;
+
+        private readonly IUnitOfWork _unitOfWork;
+
+        public PermissionService(IRepository<Permission, int> repositoryPermission, IRepository<Function, string> repositoryFunction, AppDbContext appDbContext, 
+            RoleManager<AppRole> roleManager, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _repositoryFunction = repositoryFunction;
             _repositoryPermission = repositoryPermission; 
             _appDbContext = appDbContext;
             _roleManager = roleManager;
+            _mapper = mapper;
+            _unitOfWork = unitOfWork;
+        }
+
+        public void Add(PermissionViewModel permission)
+        {
+            var permssionModel = _mapper.Map<PermissionViewModel, Permission>(permission);
+
+            _repositoryPermission.Add(permssionModel);
         }
 
         public bool CheckPermission(string functionId, string action, string[] roles)
@@ -54,6 +67,16 @@ namespace story.App.Services.Services
             return query.Any();
         }
 
+        public void DeleteByRoleId(Guid roelId)
+        {
+            List<PermissionViewModel> permissionViewModels = GetAll(roelId);
+
+            List<Permission> permissions = _mapper.Map<List<PermissionViewModel>, List<Permission>>(permissionViewModels);
+
+            _repositoryPermission.RemoveMulty(permissions);
+            
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);
@@ -65,12 +88,29 @@ namespace story.App.Services.Services
 
             if (roleId.HasValue)
             {
-                query.Where(x => x.RoleId == roleId);
+                query = query.Where(x => x.RoleId == roleId);
             }
 
             var permission = query.ProjectTo<PermissionViewModel>(AutoMapperConfig.RegisterMapping()).ToList();
 
             return permission;
+        }
+
+        public bool IsUnique(string name, Guid roleId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChanges()
+        {
+            _unitOfWork.Commit();
+        }
+
+        public void Update(PermissionViewModel permission)
+        {
+            var permissionModel = _mapper.Map<PermissionViewModel, Permission>(permission);
+
+            _repositoryPermission.Update(permissionModel);
         }
     }
 }

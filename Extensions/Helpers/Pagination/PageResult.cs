@@ -12,5 +12,7 @@ namespace story.Extensions.Helpers.Pagination
         {
             Results = new List<T>();
         }
+
+        
     }
 }

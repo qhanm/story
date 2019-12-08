@@ -8,5 +8,7 @@ namespace story.Extensions.Constants
     public static class FunctionConstant
     {
         public const string Role = "ROLE";
+
+        public const string User = "User";
     }
 }
